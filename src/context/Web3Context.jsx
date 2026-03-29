@@ -1,10 +1,14 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { ethers } from 'ethers';
 import TrustDropABI from '../abi/TrustDrop.json';
+import TrustScoreABI from '../abi/TrustScore.json';
+import TrustDropNFTABI from '../abi/TrustDropNFT.json';
 
 const Web3Context = createContext(null);
 
 const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS;
+const TRUSTSCORE_ADDRESS = import.meta.env.VITE_TRUSTSCORE_ADDRESS;
+const NFT_ADDRESS = import.meta.env.VITE_NFT_ADDRESS;
 const SEPOLIA_CHAIN_ID = '0xaa36a7'; // 11155111
 
 export function Web3Provider({ children }) {
@@ -12,19 +16,39 @@ export function Web3Provider({ children }) {
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
   const [contract, setContract] = useState(null);
+  const [trustScoreContract, setTrustScoreContract] = useState(null);
+  const [nftContract, setNftContract] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
   const [networkName, setNetworkName] = useState('');
   const [balance, setBalance] = useState('0');
   const [loading, setLoading] = useState(false);
 
-  const initializeContract = useCallback(async (signerInstance) => {
-    if (!CONTRACT_ADDRESS || CONTRACT_ADDRESS === '0x0000000000000000000000000000000000000000') {
-      console.warn('Contract address not set. Please deploy the contract and update .env');
-      return null;
+  const initializeContracts = useCallback(async (signerInstance) => {
+    // Main TrustDrop contract
+    if (CONTRACT_ADDRESS && CONTRACT_ADDRESS !== '0x0000000000000000000000000000000000000000') {
+      const mainContract = new ethers.Contract(CONTRACT_ADDRESS, TrustDropABI.abi, signerInstance);
+      setContract(mainContract);
     }
-    const contractInstance = new ethers.Contract(CONTRACT_ADDRESS, TrustDropABI.abi, signerInstance);
-    setContract(contractInstance);
-    return contractInstance;
+
+    // TrustScore contract
+    if (TRUSTSCORE_ADDRESS) {
+      try {
+        const tsContract = new ethers.Contract(TRUSTSCORE_ADDRESS, TrustScoreABI.abi, signerInstance);
+        setTrustScoreContract(tsContract);
+      } catch (e) {
+        console.warn('TrustScore contract init failed:', e);
+      }
+    }
+
+    // NFT Badge contract
+    if (NFT_ADDRESS) {
+      try {
+        const nft = new ethers.Contract(NFT_ADDRESS, TrustDropNFTABI.abi, signerInstance);
+        setNftContract(nft);
+      } catch (e) {
+        console.warn('NFT contract init failed:', e);
+      }
+    }
   }, []);
 
   const updateBalance = useCallback(async (providerInstance, address) => {
@@ -45,19 +69,16 @@ export function Web3Provider({ children }) {
     try {
       setLoading(true);
 
-      // Request accounts
       const accounts = await window.ethereum.request({
         method: 'eth_requestAccounts',
       });
 
-      // Switch to Sepolia
       try {
         await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
           params: [{ chainId: SEPOLIA_CHAIN_ID }],
         });
       } catch (switchError) {
-        // If Sepolia is not added, add it
         if (switchError.code === 4902) {
           await window.ethereum.request({
             method: 'wallet_addEthereumChain',
@@ -83,15 +104,14 @@ export function Web3Provider({ children }) {
       setNetworkName('Sepolia Testnet');
 
       await updateBalance(browserProvider, address);
-      await initializeContract(signerInstance);
+      await initializeContracts(signerInstance);
     } catch (err) {
       console.error('Error connecting wallet:', err);
     } finally {
       setLoading(false);
     }
-  }, [initializeContract, updateBalance]);
+  }, [initializeContracts, updateBalance]);
 
-  // Listen for account/network changes
   useEffect(() => {
     if (!window.ethereum) return;
 
@@ -100,6 +120,8 @@ export function Web3Provider({ children }) {
         setAccount(null);
         setIsConnected(false);
         setContract(null);
+        setTrustScoreContract(null);
+        setNftContract(null);
       } else {
         setAccount(accounts[0]);
         if (provider) {
@@ -115,7 +137,6 @@ export function Web3Provider({ children }) {
     window.ethereum.on('accountsChanged', handleAccountsChanged);
     window.ethereum.on('chainChanged', handleChainChanged);
 
-    // Check if already connected
     window.ethereum.request({ method: 'eth_accounts' }).then((accounts) => {
       if (accounts.length > 0) {
         connectWallet();
@@ -133,12 +154,16 @@ export function Web3Provider({ children }) {
     provider,
     signer,
     contract,
+    trustScoreContract,
+    nftContract,
     connectWallet,
     isConnected,
     networkName,
     balance,
     loading,
     contractAddress: CONTRACT_ADDRESS,
+    trustScoreAddress: TRUSTSCORE_ADDRESS,
+    nftAddress: NFT_ADDRESS,
   };
 
   return (

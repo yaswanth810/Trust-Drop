@@ -1,0 +1,175 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "sender", "type": "address"},{"internalType": "uint256", "name": "tokenId", "type": "uint256"},{"internalType": "address", "name": "owner", "type": "address"}],
+      "name": "ERC721IncorrectOwner",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {"indexed": true, "internalType": "address", "name": "donor", "type": "address"},
+        {"indexed": false, "internalType": "uint256", "name": "tokenId", "type": "uint256"},
+        {"indexed": false, "internalType": "enum TrustDropNFT.BadgeTier", "name": "tier", "type": "uint8"}
+      ],
+      "name": "BadgeMinted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {"indexed": true, "internalType": "address", "name": "donor", "type": "address"},
+        {"indexed": false, "internalType": "uint256", "name": "totalDonated", "type": "uint256"}
+      ],
+      "name": "DonationTracked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {"indexed": true, "internalType": "address", "name": "previousOwner", "type": "address"},
+        {"indexed": true, "internalType": "address", "name": "newOwner", "type": "address"}
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {"indexed": true, "internalType": "address", "name": "from", "type": "address"},
+        {"indexed": true, "internalType": "address", "name": "to", "type": "address"},
+        {"indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256"}
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "BRONZE_THRESHOLD",
+      "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "GOLD_THRESHOLD",
+      "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "PLATINUM_THRESHOLD",
+      "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "SILVER_THRESHOLD",
+      "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "", "type": "address"}],
+      "name": "donors",
+      "outputs": [
+        {"internalType": "uint256", "name": "totalDonated", "type": "uint256"},
+        {"internalType": "uint256", "name": "campaignsSupported", "type": "uint256"},
+        {"internalType": "enum TrustDropNFT.BadgeTier", "name": "highestTier", "type": "uint8"},
+        {"internalType": "bool", "name": "exists", "type": "bool"}
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "donor", "type": "address"}],
+      "name": "getBadges",
+      "outputs": [{"internalType": "uint256[]", "name": "", "type": "uint256[]"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "donor", "type": "address"}],
+      "name": "getDonorInfo",
+      "outputs": [
+        {"internalType": "uint256", "name": "totalDonated", "type": "uint256"},
+        {"internalType": "uint256", "name": "campaignsSupported", "type": "uint256"},
+        {"internalType": "enum TrustDropNFT.BadgeTier", "name": "highestTier", "type": "uint8"},
+        {"internalType": "uint256", "name": "badgeCount", "type": "uint256"}
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "enum TrustDropNFT.BadgeTier", "name": "tier", "type": "uint8"}],
+      "name": "getTierName",
+      "outputs": [{"internalType": "string", "name": "", "type": "string"}],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {"internalType": "address", "name": "donor", "type": "address"},
+        {"internalType": "enum TrustDropNFT.BadgeTier", "name": "tier", "type": "uint8"},
+        {"internalType": "string", "name": "uri", "type": "string"}
+      ],
+      "name": "mintBadge",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "uint256", "name": "tokenId", "type": "uint256"}],
+      "name": "ownerOf",
+      "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "name": "tokenTier",
+      "outputs": [{"internalType": "enum TrustDropNFT.BadgeTier", "name": "", "type": "uint8"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "uint256", "name": "tokenId", "type": "uint256"}],
+      "name": "tokenURI",
+      "outputs": [{"internalType": "string", "name": "", "type": "string"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {"internalType": "address", "name": "donor", "type": "address"},
+        {"internalType": "uint256", "name": "amount", "type": "uint256"},
+        {"internalType": "uint256", "name": "campaignId", "type": "uint256"}
+      ],
+      "name": "trackDonation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "newOwner", "type": "address"}],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}

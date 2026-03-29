@@ -4,6 +4,7 @@ import { useWeb3 } from '../context/Web3Context';
 import { getAllCampaigns, getDonationAmount } from '../utils/contract';
 import { formatEth, calculatePercentage, getMilestoneStatus, getEtherscanAddressUrl } from '../utils/helpers';
 import Footer from '../components/Footer';
+import BadgeShowcase from '../components/BadgeShowcase';
 import { motion } from 'framer-motion';
 import { Heart, Wallet, Loader2, ExternalLink, Target, ArrowRight } from 'lucide-react';
 
@@ -92,6 +93,14 @@ export default function MyDonations() {
                     <p className="text-3xl font-bold text-white">{donations.length}</p>
                   </div>
                 </div>
+              </div>
+
+              {/* NFT Badge Showcase */}
+              <div className="mb-8">
+                <BadgeShowcase
+                  totalDonated={totalDonated}
+                  campaignsSupported={donations.length}
+                />
               </div>
 
               {/* Donation List */}

@@ -1,0 +1,190 @@
+{
+  "nav": {
+    "home": "Home",
+    "createCampaign": "Create Campaign",
+    "validator": "Validator",
+    "myDonations": "My Donations",
+    "analytics": "Analytics",
+    "connectWallet": "Connect Wallet"
+  },
+  "hero": {
+    "title1": "Every Rupee.",
+    "title2": "Tracked. Trusted.",
+    "title3": "Transparent.",
+    "subtitle": "Blockchain-powered NGO fund transparency platform. Donate with confidence, knowing every milestone is verified by independent validators before funds are released.",
+    "cta": "Connect Wallet",
+    "howItWorks": "How It Works"
+  },
+  "campaigns": {
+    "title": "Active Campaigns",
+    "subtitle": "Support transparent, milestone-verified NGO campaigns",
+    "search": "Search campaigns by name or description...",
+    "showing": "Showing {{count}} of {{total}} campaigns",
+    "noMatch": "No campaigns match your filters",
+    "noCampaigns": "No active campaigns yet",
+    "adjustFilters": "Try adjusting your search or filters",
+    "beFirst": "Be the first to create a campaign!",
+    "connectToView": "Connect your wallet to view campaigns",
+    "connectDesc": "Connect MetaMask to browse and donate to active campaigns",
+    "donateNow": "Donate Now",
+    "raised": "raised",
+    "goal": "Goal",
+    "milestones": "milestones"
+  },
+  "filters": {
+    "title": "Filter Campaigns",
+    "clearAll": "Clear All",
+    "status": "Status",
+    "category": "Category",
+    "sort": {
+      "newest": "Most Recently Created",
+      "funded": "Most Funded (%)",
+      "ending": "Ending Soonest",
+      "donors": "Most Donors"
+    },
+    "statusOptions": {
+      "all": "All",
+      "active": "Active",
+      "completed": "Completed",
+      "fullyFunded": "Fully Funded"
+    },
+    "categories": {
+      "all": "All",
+      "relief": "Relief",
+      "education": "Education",
+      "medical": "Medical",
+      "infrastructure": "Infrastructure",
+      "environment": "Environment"
+    }
+  },
+  "howItWorks": {
+    "title": "How TrustDrop Works",
+    "subtitle": "A simple, transparent process for accountable giving",
+    "steps": [
+      { "title": "NGO Creates Campaign", "desc": "Define milestones with fund allocation and deadlines" },
+      { "title": "Donors Contribute", "desc": "ETH is locked in the smart contract securely" },
+      { "title": "NGO Submits Proof", "desc": "Upload milestone completion proof to IPFS" },
+      { "title": "Validators Approve", "desc": "3/5 validators verify, funds auto-release to NGO" }
+    ]
+  },
+  "createCampaign": {
+    "title": "Create New Campaign",
+    "subtitle": "Define your campaign milestones and fund allocation",
+    "back": "Back",
+    "campaignDetails": "Campaign Details",
+    "campaignTitle": "Campaign Title",
+    "titlePlaceholder": "e.g., Vizag Flood Relief 2025",
+    "description": "Description",
+    "descPlaceholder": "Describe your campaign goals, beneficiaries, and how funds will be used...",
+    "category": "Category",
+    "milestones": "Milestones",
+    "milestoneDesc": "Milestone description",
+    "amount": "Amount (ETH)",
+    "deadline": "Deadline",
+    "addMilestone": "Add Another Milestone",
+    "removeMilestone": "Remove",
+    "total": "Total",
+    "submit": "Create Campaign",
+    "creating": "Creating..."
+  },
+  "campaignDetail": {
+    "back": "Back",
+    "ngoAddress": "NGO Address",
+    "totalGoal": "Total Goal",
+    "fundsRaised": "Funds Raised",
+    "donateTitle": "Support This Campaign",
+    "donateBtn": "Donate ETH",
+    "milestoneTracker": "Milestone Tracker",
+    "viewProof": "View Proof on IPFS",
+    "submitProof": "Submit Proof",
+    "approved": "approved"
+  },
+  "validator": {
+    "title": "Validator Dashboard",
+    "subtitle": "Review and verify milestone proofs submitted by NGOs",
+    "connectTitle": "Connect Your Wallet",
+    "connectDesc": "Connect MetaMask to access the validator dashboard",
+    "registerTitle": "Become a Validator",
+    "registerDesc": "Stake 0.01 ETH to register as a validator and help verify milestones",
+    "registerBtn": "Register as Validator (0.01 ETH)",
+    "registering": "Registering...",
+    "pendingReview": "Milestones Pending Review",
+    "noPending": "No milestones pending review",
+    "approveBtn": "Approve Milestone",
+    "leaderboard": "Validator Leaderboard",
+    "accuracy": "Accuracy",
+    "totalVotes": "Total Votes",
+    "earnings": "Earnings"
+  },
+  "myDonations": {
+    "title": "My Donations",
+    "subtitle": "Track your contributions and their impact",
+    "connectTitle": "Connect Your Wallet",
+    "connectDesc": "Connect MetaMask to view your donation history",
+    "noDonations": "No donations yet",
+    "noDonationsDesc": "Support a campaign to track your contributions here",
+    "totalDonated": "Total Donated",
+    "campaignsSupported": "Campaigns Supported",
+    "badges": "Your NFT Badges"
+  },
+  "analytics": {
+    "title": "Platform Analytics",
+    "subtitle": "Real-time insights into TrustDrop platform performance",
+    "ethLocked": "ETH Locked",
+    "ethReleased": "ETH Released",
+    "activeCampaigns": "Active Campaigns",
+    "milestonesDone": "Milestones Done",
+    "avgTrustScore": "Avg TrustScore",
+    "uniqueDonors": "Unique Donors",
+    "cumulativeETH": "Cumulative ETH Donated",
+    "milestoneCompletion": "Milestone Completion by Campaign",
+    "fundDistribution": "Fund Distribution by Category",
+    "dailyActivity": "Daily Donation Activity"
+  },
+  "stats": {
+    "totalDonated": "Total Donated",
+    "activeCampaigns": "Active Campaigns",
+    "milestonesCompleted": "Milestones Completed"
+  },
+  "features": {
+    "fundsLocked": "Funds Locked",
+    "fundsLockedDesc": "Donations are held in smart contracts until milestones are verified",
+    "validatorVerified": "Validator Verified",
+    "validatorVerifiedDesc": "3/5 independent validators must approve before any funds release",
+    "fullyTransparent": "Fully Transparent",
+    "fullyTransparentDesc": "Every transaction is recorded on-chain and publicly verifiable"
+  },
+  "footer": {
+    "description": "Blockchain-powered NGO fund transparency platform. Every donation is tracked, every milestone verified, every rupee accounted for.",
+    "platform": "Platform",
+    "network": "Network",
+    "browseCampaigns": "Browse Campaigns",
+    "createCampaign": "Create Campaign",
+    "becomeValidator": "Become a Validator",
+    "myDonations": "My Donations",
+    "sepoliaEtherscan": "Sepolia Etherscan",
+    "getTestnetETH": "Get Testnet ETH",
+    "installMetaMask": "Install MetaMask",
+    "copyright": "© 2025 TrustDrop. Built on Ethereum Sepolia Testnet.",
+    "madeWith": "Made with ♡ for transparent philanthropy"
+  },
+  "common": {
+    "donate": "Donate",
+    "campaign": "Campaign",
+    "milestone": "Milestone",
+    "validator": "Validator",
+    "trustScore": "Trust Score",
+    "totalDonated": "Total Donated",
+    "fundsReleased": "Funds Released",
+    "proofSubmitted": "Proof Submitted",
+    "loading": "Loading...",
+    "error": "Something went wrong"
+  },
+  "activity": {
+    "title": "Live Activity",
+    "live": "Live",
+    "offline": "Offline",
+    "noActivity": "No activity yet",
+    "noActivityDesc": "Events will appear here in real-time"
+  }
+}

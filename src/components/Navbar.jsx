@@ -1,12 +1,19 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useWeb3 } from '../context/Web3Context';
+import { useTheme } from '../context/ThemeContext';
 import { shortenAddress } from '../utils/helpers';
-import { Shield, Menu, X, Home, PlusCircle, CheckSquare, Heart, Wallet } from 'lucide-react';
+import { 
+  Shield, Menu, X, Home, PlusCircle, CheckSquare, Heart, Wallet,
+  BarChart3, Moon, Sun, Globe
+} from 'lucide-react';
 
 export default function Navbar() {
   const { account, isConnected, connectWallet, balance, loading } = useWeb3();
+  const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -15,6 +22,7 @@ export default function Navbar() {
     { to: '/create', label: 'Create Campaign', icon: PlusCircle },
     { to: '/validator', label: 'Validator', icon: CheckSquare },
     { to: '/my-donations', label: 'My Donations', icon: Heart },
+    { to: '/analytics', label: 'Analytics', icon: BarChart3 },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -28,7 +36,7 @@ export default function Navbar() {
             <div className="w-9 h-9 bg-gradient-to-br from-accent to-accent-700 rounded-lg flex items-center justify-center group-hover:shadow-lg group-hover:shadow-accent/20 transition-all">
               <Shield size={20} className="text-white" />
             </div>
-            <span className="text-lg font-bold text-white">
+            <span className="text-lg font-bold">
               Trust<span className="gradient-text">Drop</span>
             </span>
           </Link>
@@ -51,10 +59,33 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Wallet Button */}
-          <div className="flex items-center gap-3">
+          {/* Right Controls */}
+          <div className="flex items-center gap-2">
+            {/* Language Toggle */}
+            <button
+              onClick={() => {
+                const newLang = i18n.language === 'en' ? 'te' : 'en';
+                i18n.changeLanguage(newLang);
+              }}
+              className="p-2 rounded-xl text-gray-400 hover:text-accent hover:bg-white/5 transition-all flex items-center gap-1"
+              title="Switch Language"
+            >
+              <Globe size={16} />
+              <span className="text-xs font-medium">{i18n.language === 'en' ? 'తె' : 'EN'}</span>
+            </button>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-xl text-gray-400 hover:text-accent hover:bg-white/5 transition-all"
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            {/* Wallet */}
             {isConnected ? (
-              <div className="hidden md:flex items-center gap-3">
+              <div className="hidden md:flex items-center gap-2">
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-sm">
                   <span className="status-dot connected" />
                   <span className="text-gray-300">{parseFloat(balance).toFixed(3)} ETH</span>
@@ -75,7 +106,7 @@ export default function Navbar() {
                 ) : (
                   <>
                     <Wallet size={16} />
-                    Connect Wallet
+                    <span className="hidden sm:inline">Connect Wallet</span>
                   </>
                 )}
               </button>

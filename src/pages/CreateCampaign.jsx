@@ -5,7 +5,9 @@ import { createNewCampaign } from '../utils/contract';
 import { formatEth } from '../utils/helpers';
 import { ethers } from 'ethers';
 import { motion } from 'framer-motion';
-import { PlusCircle, Trash2, Loader2, ArrowLeft, Target, Wallet } from 'lucide-react';
+import { PlusCircle, Trash2, Loader2, ArrowLeft, Target, Wallet, Tag } from 'lucide-react';
+
+const CATEGORIES = ['Relief', 'Education', 'Medical', 'Infrastructure', 'Environment'];
 import Footer from '../components/Footer';
 import toast from 'react-hot-toast';
 
@@ -15,6 +17,7 @@ export default function CreateCampaign() {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('Relief');
   const [milestones, setMilestones] = useState([
     { description: '', amount: '', deadline: '' },
   ]);
@@ -73,7 +76,8 @@ export default function CreateCampaign() {
       const deadlines = milestones.map((m) => m.deadline);
 
       toast.loading('Creating campaign on-chain...', { id: 'create-campaign' });
-      const tx = await createNewCampaign(contract, title, description, descs, amounts, deadlines);
+      const fullDescription = `[${category}] ${description}`;
+      const tx = await createNewCampaign(contract, title, fullDescription, descs, amounts, deadlines);
       toast.loading('Transaction pending...', { id: 'create-campaign' });
       await tx.wait();
       toast.success('Campaign created successfully! ✓', { id: 'create-campaign' });
@@ -134,6 +138,22 @@ export default function CreateCampaign() {
                   rows={4}
                   disabled={loading}
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-400 mb-2 flex items-center gap-1">
+                  <Tag size={14} /> Category
+                </label>
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="input-field"
+                  disabled={loading}
+                >
+                  {CATEGORIES.map((cat) => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
               </div>
             </div>
 

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { formatEth, calculatePercentage, getMilestoneStatus, shortenAddress } from '../utils/helpers';
 import { ArrowRight, Target, Users } from 'lucide-react';
+import TrustScoreBadge from './TrustScoreBadge';
 
 export default function CampaignCard({ campaign, index = 0 }) {
   const percentage = calculatePercentage(campaign.raisedFunds, campaign.totalFunds);
@@ -9,6 +10,15 @@ export default function CampaignCard({ campaign, index = 0 }) {
   const completedMilestones = campaign.milestones
     ? campaign.milestones.filter((m) => m.isApproved || m.fundsReleased).length
     : 0;
+
+  // Compute a simple trust score from milestone data
+  const totalMs = campaign.milestones?.length || 1;
+  const simpleScore = Math.min(Math.round((completedMilestones / totalMs) * 80 + 10), 100);
+
+  // Extract category from description if present
+  const categoryMatch = campaign.description?.match(/^\[(\w+)\]/);
+  const category = categoryMatch ? categoryMatch[1] : null;
+  const cleanDescription = campaign.description?.replace(/^\[\w+\]\s*/, '') || '';
 
   return (
     <motion.div
@@ -23,20 +33,32 @@ export default function CampaignCard({ campaign, index = 0 }) {
           <div className="h-2 bg-gradient-to-r from-accent via-accent-600 to-blue" />
 
           <div className="p-6">
-            {/* Title & NGO */}
-            <div className="mb-4">
-              <h3 className="text-lg font-bold text-white mb-1 group-hover:text-accent transition-colors line-clamp-1">
-                {campaign.title}
-              </h3>
-              <p className="text-gray-400 text-sm flex items-center gap-1">
-                <Users size={14} />
-                {shortenAddress(campaign.ngoAddress)}
-              </p>
+            {/* Title & NGO + TrustScore */}
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex-1 mr-3">
+                <div className="flex items-center gap-2 mb-1">
+                  {category && (
+                    <span className="badge badge-approved !text-[9px] !py-0 !px-2">{category}</span>
+                  )}
+                </div>
+                <h3 className="text-lg font-bold group-hover:text-accent transition-colors line-clamp-1">
+                  {campaign.title}
+                </h3>
+                <Link
+                  to={`/ngo/${campaign.ngoAddress}`}
+                  className="text-gray-400 text-sm flex items-center gap-1 hover:text-accent transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Users size={14} />
+                  {shortenAddress(campaign.ngoAddress)}
+                </Link>
+              </div>
+              <TrustScoreBadge score={simpleScore} size="sm" showLabel={false} />
             </div>
 
             {/* Description */}
             <p className="text-gray-400 text-sm leading-relaxed mb-5 line-clamp-2">
-              {campaign.description}
+              {cleanDescription}
             </p>
 
             {/* Progress */}
@@ -64,7 +86,7 @@ export default function CampaignCard({ campaign, index = 0 }) {
                 </span>
               </div>
 
-              {/* Milestone Badges */}
+              {/* Milestone Dots */}
               <div className="flex gap-1">
                 {campaign.milestones && campaign.milestones.slice(0, 4).map((m, i) => {
                   const status = getMilestoneStatus(m);

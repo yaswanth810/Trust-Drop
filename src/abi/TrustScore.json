@@ -1,0 +1,157 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "owner", "type": "address"}],
+      "name": "OwnableInvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "account", "type": "address"}],
+      "name": "OwnableUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {"indexed": true, "internalType": "address", "name": "ngo", "type": "address"},
+        {"indexed": false, "internalType": "uint256", "name": "newScore", "type": "uint256"}
+      ],
+      "name": "CampaignCompleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {"indexed": true, "internalType": "address", "name": "ngo", "type": "address"},
+        {"indexed": false, "internalType": "uint256", "name": "newScore", "type": "uint256"}
+      ],
+      "name": "MilestoneRejected",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {"indexed": true, "internalType": "address", "name": "ngo", "type": "address"},
+        {"indexed": false, "internalType": "bool", "name": "onTime", "type": "bool"},
+        {"indexed": false, "internalType": "uint256", "name": "newScore", "type": "uint256"}
+      ],
+      "name": "MilestoneTracked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {"indexed": true, "internalType": "address", "name": "previousOwner", "type": "address"},
+        {"indexed": true, "internalType": "address", "name": "newOwner", "type": "address"}
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "ngoAddress", "type": "address"}],
+      "name": "calculateTrustScore",
+      "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "ngoAddress", "type": "address"}],
+      "name": "getNGOStats",
+      "outputs": [
+        {"internalType": "uint256", "name": "onTimeMilestones", "type": "uint256"},
+        {"internalType": "uint256", "name": "lateMilestones", "type": "uint256"},
+        {"internalType": "uint256", "name": "rejectedMilestones", "type": "uint256"},
+        {"internalType": "uint256", "name": "completedCampaigns", "type": "uint256"},
+        {"internalType": "uint256", "name": "totalMilestones", "type": "uint256"},
+        {"internalType": "uint256", "name": "trustScore", "type": "uint256"}
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRegisteredNGOCount",
+      "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "ngoAddress", "type": "address"}],
+      "name": "getTrustScore",
+      "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "", "type": "address"}],
+      "name": "ngoStats",
+      "outputs": [
+        {"internalType": "uint256", "name": "onTimeMilestones", "type": "uint256"},
+        {"internalType": "uint256", "name": "lateMilestones", "type": "uint256"},
+        {"internalType": "uint256", "name": "rejectedMilestones", "type": "uint256"},
+        {"internalType": "uint256", "name": "completedCampaigns", "type": "uint256"},
+        {"internalType": "uint256", "name": "totalMilestones", "type": "uint256"},
+        {"internalType": "bool", "name": "exists", "type": "bool"}
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+      "name": "registeredNGOs",
+      "outputs": [{"internalType": "address", "name": "", "type": "address"}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "ngoAddress", "type": "address"}],
+      "name": "trackCampaignCompleted",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {"internalType": "address", "name": "ngoAddress", "type": "address"},
+        {"internalType": "bool", "name": "onTime", "type": "bool"}
+      ],
+      "name": "trackMilestoneCompletion",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "ngoAddress", "type": "address"}],
+      "name": "trackMilestoneRejection",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{"internalType": "address", "name": "newOwner", "type": "address"}],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}
